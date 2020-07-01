@@ -3,6 +3,9 @@ const mutations = {
     state.parkingSpace = payload.ps;
     state.carsAvailable = payload.ca;
   },
+  searchQuery(state, payload) {
+    state.query = payload;
+  },
   createParkingWithCars(state, payload) {
     let { arr } = payload;
     arr.map((item) => {

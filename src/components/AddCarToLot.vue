@@ -1,8 +1,8 @@
 <template>
-  <form @submit.prevent="addToParkingLot" class="flex-1">
+  <form @submit.prevent="addToParkingLot" >
     <div class="form-group">
-      <label>Car Reg Number</label>
-      <input type="text" v-model="carNo" />
+      <label>Car Plate Number</label>
+      <input type="text" v-model="carNo" v-mask="mask">
     </div>
     <div class="form-group">
       <label for="colors">Choose a color:</label>
@@ -28,6 +28,7 @@ export default {
     return {
       carNo: "",
       carColor: "",
+      mask: "AA-##-AA-####"
     };
   },
   methods: {

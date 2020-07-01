@@ -2,10 +2,12 @@
   <div>
     <h1>Parking Lot Dashboard</h1>
     <div class="flex-box">
-      <addCarToLot />
-
+      <div class="flex-1">
+        <addCarToLot />
+        <SearchParkingLot />
+      </div>
       <!-- display table -->
-      <div v-if="carsTable != ''" class="flex-2">
+      <div v-if="getAllCars != ''" class="flex-2">
         <table id="firstTable">
           <thead>
             <tr>
@@ -19,7 +21,7 @@
             <TableRow
               :key="item.slot"
               :row="item"
-              v-for="item in carsTable"
+              v-for="item in getAllCars"
             ></TableRow>
           </tbody>
         </table>
@@ -31,37 +33,20 @@
 <script>
 import TableRow from "./TableRow";
 import addCarToLot from "./AddCarToLot";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
+import SearchParkingLot from "./SearchParkingLot";
 export default {
   name: "ParkingLot",
-  components: { TableRow, addCarToLot },
+  components: { TableRow, addCarToLot, SearchParkingLot },
   computed: {
-    ...mapState(["parkingSpace", "carsAvailable", "carsTable"]),
+    ...mapState(["parkingSpace", "carsAvailable"]),
+    ...mapGetters(["getAllCars"]),
   },
   data() {
     return {};
   },
   methods: {},
-  created() {
-    // let s = this.parkingSpace;
-    // let c = this.carsAvailable;
-    // let colors = ["Black", "White", "Blue", "Red"];
-    // for (let i = 0; i < s; i++) {
-    //   if (i < c) {
-    //     this.carsTable.push({
-    //       slot: i,
-    //       regNumber: "KA-04-TY-3469",
-    //       color: colors[Math.floor(Math.random() * colors.length)]
-    //     });
-    //   } else {
-    //     this.carsTable.push({
-    //       slot: i,
-    //       regNumber: "",
-    //       color: ""
-    //     });
-    //   }
-    // }
-  },
+  created() {},
 };
 </script>
 

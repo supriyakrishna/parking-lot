@@ -7,5 +7,6 @@ const state = {
     color: "",
     plate: "",
   },
+  query: "",
 };
 export default state;
