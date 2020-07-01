@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Create Parking Lot</h1>
-    <h1>{{ newState }}</h1>
     <form @submit.prevent="generateParking" class="createForm">
       <div v-if="errors.length">
         <b>Please correct the following error(s):</b>
@@ -33,24 +32,44 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import router from "./router";
+import RandExp from "randexp";
 export default {
   name: "CreateParkingLot",
   computed: {
-    ...mapState(["newState"]),
+    ...mapState(["colors"]),
   },
   data() {
     return {
       parkingSpace: "",
       carsAvaiable: "",
       errors: [],
+      arr: [],
     };
   },
   methods: {
     ...mapActions(["generateParkingLot"]),
     generateParking() {
-      const { parkingSpace: ps, carsAvaiable: ca } = this;
+      const { parkingSpace: ps, carsAvaiable: ca, arr } = this;
+
+      for (let i = 0; i < ps; i++) {
+        if (i < ca) {
+          this.arr.push({
+            slot: i,
+            regNumber: new RandExp(
+              /^[A-Z]{2}[-][0-9]{2}[-][A-Z]{2}[-][0-9]{4}$/
+            ).gen(),
+            color: this.colors[Math.floor(Math.random() * this.colors.length)],
+          });
+        } else {
+          this.arr.push({
+            slot: i,
+            regNumber: "",
+            color: "",
+          });
+        }
+      }
       if (ps && ca) {
-        this.generateParkingLot({ ps, ca }).then(() => {
+        this.generateParkingLot({ ps, ca, arr }).then(() => {
           router.push({
             name: "parkingLot",
           });

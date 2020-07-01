@@ -5,14 +5,23 @@
       <input type="text" v-model="carNo" />
     </div>
     <div class="form-group">
-      <label>Color</label>
-      <input type="text" v-model="carColor" />
+      <label for="colors">Choose a color:</label>
+
+      <select name="colors" id="colors" v-model="carColor">
+        <option disabled value>Please select one</option>
+        <option value="blue">Blue</option>
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="red">Red</option>
+      </select>
+      <!-- <input type="text" v-model="carColor"> -->
     </div>
     <input type="submit" value="Click to Add" />
   </form>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "AddCarToLot",
   data() {
@@ -22,18 +31,12 @@ export default {
     };
   },
   methods: {
-    // deleteCar(id) {
-    // //   this.carsTable[id].regNumber = "";
-    // //   this.carsTable[id].color = "";
-    // // },
-    // // addToParkingLot() {
-    // //   let temp = this.carsTable.filter(slot => {
-    // //     return slot.regNumber === "";
-    // //   });
-    // //   let emptySlot = temp[0].slot;
-    // //   this.carsTable[emptySlot].regNumber = this.carNo;
-    // //   this.carsTable[emptySlot].color = this.carColor;
-    // // }
+    ...mapMutations(["addCarToLot"]),
+    addToParkingLot() {
+      let no = this.carNo;
+      let color = this.carColor;
+      this.$store.commit("addCarToLot", { no, color });
+    },
   },
 };
 </script>
