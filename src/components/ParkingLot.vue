@@ -7,46 +7,30 @@
         <SearchParkingLot />
       </div>
       <!-- display table -->
-      <div v-if="getAllCars != ''" class="flex-2">
-        <table id="firstTable">
-          <thead>
-            <tr>
-              <th>Slots</th>
-              <th>Reistration Number</th>
-              <th>Color</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <TableRow
-              :key="item.slot"
-              :row="item"
-              v-for="item in getAllCars"
-            ></TableRow>
-          </tbody>
-        </table>
+      <div class="flex-2">
+        <CarsTable :carsList="getAllCars" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import TableRow from "./TableRow";
+import CarsTable from "./CarsTable";
 import addCarToLot from "./AddCarToLot";
 import { mapState, mapGetters } from "vuex";
 import SearchParkingLot from "./SearchParkingLot";
 export default {
   name: "ParkingLot",
-  components: { TableRow, addCarToLot, SearchParkingLot },
+  components: { addCarToLot, SearchParkingLot, CarsTable },
   computed: {
     ...mapState(["parkingSpace", "carsAvailable"]),
-    ...mapGetters(["getAllCars"]),
+    ...mapGetters(["getAllCars"])
   },
   data() {
     return {};
   },
   methods: {},
-  created() {},
+  created() {}
 };
 </script>
 

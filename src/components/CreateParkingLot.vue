@@ -5,13 +5,7 @@
       <div v-if="errors.length">
         <b>Please correct the following error(s):</b>
         <ul>
-          <li
-            v-for="(error, index) in errors"
-            v-bind:key="index"
-            style="color:red"
-          >
-            {{ error }}
-          </li>
+          <li v-for="(error, index) in errors" v-bind:key="index" style="color:red">{{ error }}</li>
         </ul>
       </div>
       <div class="form-group">
@@ -36,14 +30,14 @@ import RandExp from "randexp";
 export default {
   name: "CreateParkingLot",
   computed: {
-    ...mapState(["colors"]),
+    ...mapState(["colors"])
   },
   data() {
     return {
       parkingSpace: "",
       carsAvaiable: "",
       errors: [],
-      arr: [],
+      arr: []
     };
   },
   methods: {
@@ -54,24 +48,24 @@ export default {
       for (let i = 0; i < ps; i++) {
         if (i < ca) {
           this.arr.push({
-            slot: i,
+            slot: "A" + i,
             regNumber: new RandExp(
               /^[A-Z]{2}[-][0-9]{2}[-][A-Z]{2}[-][0-9]{4}$/
             ).gen(),
-            color: this.colors[Math.floor(Math.random() * this.colors.length)],
+            color: this.colors[Math.floor(Math.random() * this.colors.length)]
           });
         } else {
           this.arr.push({
-            slot: i,
+            slot: "A" + i,
             regNumber: "",
-            color: "",
+            color: ""
           });
         }
       }
       if (ps && ca) {
         this.generateParkingLot({ ps, ca, arr }).then(() => {
           router.push({
-            name: "parkingLot",
+            name: "parkingLot"
           });
         });
       }
@@ -82,8 +76,8 @@ export default {
       if (!ca) {
         this.errors.push("number of cars is required");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

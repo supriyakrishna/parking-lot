@@ -1,8 +1,6 @@
 const getters = {
-  searchByCarColor: (state, val) => {
-    console.log(val);
+  searchByCarColor: (state) => {
     return state.carsTable.filter((item) => item.slot === 1);
-    //console.log(val)
   },
   getAllCars(state) {
     let cars = state.carsTable;
@@ -10,7 +8,14 @@ const getters = {
     if (state.query === "") return cars;
     else if (query && query !== "") {
       cars = cars.filter((item) => {
-        return item.color === query;
+        let status = false;
+        if (item.color.toUpperCase().includes(query.toUpperCase()))
+          status = true;
+        if (item.slot.toUpperCase().includes(query.toUpperCase()))
+          status = true;
+        if (item.regNumber.toUpperCase().includes(query.toUpperCase()))
+          status = true;
+        return status;
       });
     }
     return cars;

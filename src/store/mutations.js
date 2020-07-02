@@ -17,16 +17,23 @@ const mutations = {
     });
   },
   deleteCarParking(state, payload) {
-    state.carsTable[payload].regNumber = "";
-    state.carsTable[payload].color = "";
+    let temp = state.carsTable.findIndex((item) => item.slot === payload);
+    state.carsTable[temp].regNumber = "";
+    state.carsTable[temp].color = "";
   },
   addCarToLot(state, payload) {
     let temp = state.carsTable.filter((slot) => {
       return slot.regNumber === "";
     });
-    let emptySlot = temp[0].slot;
-    state.carsTable[emptySlot].regNumber = payload.no;
-    state.carsTable[emptySlot].color = payload.color;
+    if (temp != "") {
+      let emptySlot = state.carsTable.findIndex(
+        (item) => item.slot === temp[0].slot
+      );
+      state.carsTable[emptySlot].regNumber = payload.no;
+      state.carsTable[emptySlot].color = payload.color;
+    } else {
+      alert("All slots are full");
+    }
   },
 };
 export default mutations;

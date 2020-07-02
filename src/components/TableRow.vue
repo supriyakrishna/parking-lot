@@ -18,8 +18,8 @@ export default {
     ...mapMutations(["deleteCarParking"]),
     removeCar(p) {
       this.$store.commit("deleteCarParking", p);
-    },
-  },
+    }
+  }
 };
 </script>
 
