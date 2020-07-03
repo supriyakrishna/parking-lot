@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./components/router";
 import store from "../src/store";
+import './plugins/element.js'
 
 // import ElementUI from "element-ui";
 // import "element-ui/lib/theme-chalk/index.css";

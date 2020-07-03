@@ -1,32 +1,48 @@
 <template>
-  <table id="firstTable">
-    <thead>
-      <tr>
-        <th>Slots</th>
-        <th>Reistration Number</th>
-        <th>Color</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <TableRow :key="item.slot" :row="item" v-for="item in carsList"></TableRow>
-    </tbody>
-  </table>
+  <div>
+    <el-table :data="carsList" height="600" style="width: 100%" align="center">
+      <el-table-column prop="slot" label="Slot" width="180"> </el-table-column>
+      <el-table-column label="Cars present in parking lot">
+        <el-table-column
+          prop="regNumber"
+          label="Registration Number"
+          width="180"
+        >
+        </el-table-column>
+        <el-table-column prop="color" label="Color" width="180">
+        </el-table-column>
+        <el-table-column label="Actions" width="120">
+          <template slot-scope="scope">
+            <el-button
+              v-if="scope.row.regNumber"
+              @click="removeCar(scope.row.slot)"
+              type="text"
+              size="small"
+            >
+              Remove</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
-import TableRow from "./TableRow";
-import { mapGetters, mapState } from "vuex";
+import {  mapState } from "vuex";
 export default {
   name: "CarsTable",
   props: ["carsList"],
-  components: { TableRow },
+  components: {},
   computed: {
-    ...mapGetters(["getAllCars"]),
-    ...mapState(["carsTable"])
-  }
+    ...mapState(["carsTable"]),
+  },
+  methods: {
+    removeCar(p) {
+      this.$store.commit("deleteCarParking", p);
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

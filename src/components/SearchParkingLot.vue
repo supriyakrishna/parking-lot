@@ -1,26 +1,16 @@
 <template>
-  <div>
-    <div class="form-group">
-      <input class="input" type="text" :value="message" @input="searchByQuery" />
-
-      <label>Search by slot number, color, registration number</label>
-
-      <!-- <label for="colors">Search Cars by color</label>
-
-      <select
-        name="colors"
-        id="colors"
-        v-model="color"
-        @change="searchByCarColor"
-      >
-        <option disabled value>Please select one</option>
-        <option value="blue">Blue</option>
-        <option value="black">Black</option>
-        <option value="white">White</option>
-        <option value="red">Red</option>
-      </select>-->
-    </div>
-  </div>
+  <el-card class="box-card">
+    <h2>Search for Cars present in Lot</h2>
+    <el-form :label-position="labelPosition" label-width="100px">
+      <el-form-item label="Search by slot number, color, registration number">
+        <el-input
+          v-model="val"
+          type="text"
+          @input="searchByQuery($event)"
+        ></el-input>
+      </el-form-item>
+    </el-form>
+  </el-card>
 </template>
 
 <script>
@@ -28,8 +18,9 @@ export default {
   name: "SearchParkingLot",
   data() {
     return {
-      color: "",
-      message: ""
+      message: "",
+      labelPosition: "top",
+      val: "",
     };
   },
   computed: {},
@@ -37,13 +28,12 @@ export default {
     searchByCarColor() {
       this.$store.commit("searchQuery", this.color);
     },
-    searchByQuery(e) {
-      this.$store.commit("searchQuery", e.target.value);
+    searchByQuery(val) {
+      console.log(val);
       //console.log(e.target.value);
-      // console.log(this.searchString);
-      //this.$store.getters.getAllCars(e.target.value);
-    }
-  }
+      this.$store.commit("searchQuery", val);
+    },
+  },
 };
 </script>
 

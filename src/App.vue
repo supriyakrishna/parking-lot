@@ -9,14 +9,18 @@ import Vue from "vue";
 import VueMask from "v-mask";
 Vue.use(VueMask);
 export default {
-  name: "App",
+  name: "app",
   components: {},
 };
 </script>
 
 <style>
+body {
+  background-color: lightgray;
+  overflow-x: hidden;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
